@@ -1,0 +1,19 @@
+{
+    "name": "kidshenlong/monolog-influxdb",
+    "description": "A handler for Monolog that sends messages to InfluxDB",
+    "keywords": ["log", "logging", "monolog", "influxdb", "laravel", "symfony"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael Patterson-Muir",
+            "email": "michaelpm91@googlemail.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "1.13.1",
+        "guzzlehttp/guzzle": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {"InfluxDBHandler\\": "src/InfluxDBHandler"}
+    }
+}

@@ -1,0 +1,20 @@
+monolog-influxdb
+=============
+
+InfluxDB Handler for Monolog, which allows to store log messages in an InfluxDB (v0.8) Table.
+
+# Installation
+
+# Usage
+
+# Examples
+
+# To Do
+* Write Intiliase funciton
+* Documentation
+* Doc Blocks
+* Support legacy and current influx api
+* Investigate response times for influx posts
+
+# License
+This tool is free software and is distributed under the MIT license. Please have a look at the LICENSE file for further information.
