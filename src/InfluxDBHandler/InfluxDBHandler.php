@@ -75,7 +75,7 @@ class InfluxDBHandler extends AbstractProcessingHandler
             $this->initialise();
         }
 
-        $guzzle = new Guzzle();
+        $guzzle = new Client();
         $log_object = [[
             'name' => 'sys_log',
             'columns' => [ //TODO: Columns should a param not hardcoded
