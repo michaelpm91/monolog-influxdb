@@ -46,13 +46,15 @@ class InfluxDBHandler extends AbstractProcessingHandler
      * @param int $level
      * @param bool $bubble
      */
-    public function __construct($username, $password, $endpoint, $db, $level = Logger::DEBUG, $bubble = true)
+    public function __construct($username, $password, $endpoint, $db, $async = false, $level = Logger::DEBUG, $bubble = true)
     {
         $this->username = $username;
         $this->password = $password;
         $this->endpoint = $endpoint;
         $this->db = $db;
-        $this->url = ""; //TODO: Form URL from endpoint and db.
+        $this->async = $async;
+        $this->url = rtrim($endpoint, "/")."/db/".$db."/series"; //TODO: Form URL from endpoint and db.
+        $this->authUrl = $this->url."?u=".$username."&p=".$password;
         parent::__construct($level, $bubble);
     }
 
@@ -87,16 +89,18 @@ class InfluxDBHandler extends AbstractProcessingHandler
                 $record['formatted']
             ]]
         ]];
-        $response = $guzzle->post($this->url, [
-            'query' => [
-                'u' => $this->username,
-                'p' => $this->password
-            ],
-            'body' => json_encode($log_object)
-        ]);
-
+        if(!$this->async) {
+            $response = $guzzle->post($this->url, [
+                'query' => [
+                    'u' => $this->username,
+                    'p' => $this->password
+                ],
+                'body' => json_encode($log_object)
+            ]);
+        }
 
     }
+
 
 }
 
