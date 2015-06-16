@@ -53,7 +53,7 @@ class InfluxDBHandler extends AbstractProcessingHandler
         $this->endpoint = $endpoint;
         $this->db = $db;
         $this->async = $async;
-        $this->url = rtrim($endpoint, "/")."/db/".$db."/series"; //TODO: Form URL from endpoint and db.
+        $this->url = rtrim($endpoint, "/")."/db/".$db."/series";
         $this->authUrl = $this->url."?u=".$username."&p=".$password;
         parent::__construct($level, $bubble);
     }
@@ -76,9 +76,11 @@ class InfluxDBHandler extends AbstractProcessingHandler
         }
 
 
-        $columns = ['message'];
+        $columns = [];
+        if($record['message']) $columns[] = 'message';
         $columns = array_merge($columns, array_keys($record['context']));
-        $points = [$record['message']];
+        $points = [];
+        if($record['message']) $points[] = $record['message'];
         $points = array_merge($points, array_values($record['context']));
 
         $guzzle = new Client();
