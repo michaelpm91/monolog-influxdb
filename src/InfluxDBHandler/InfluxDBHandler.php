@@ -75,20 +75,19 @@ class InfluxDBHandler extends AbstractProcessingHandler
             $this->initialise();
         }
 
+
+        $columns = ['message'];
+        $columns = array_merge($columns, array_keys($record['context']));
+        $points = [$record['message']];
+        $points = array_merge($points, array_values($record['context']));
+
         $guzzle = new Client();
         $log_object = [[
-            'name' => 'sys_log',
-            'columns' => [ //TODO: Columns should a param not hardcoded
-                "channel",
-                "level",
-                "formatted"
-            ],
-            'points' => [[ //TODO: Points should a param not hardcoded
-                $record['channel'],
-                $record['level'],
-                $record['formatted']
-            ]]
+            'name' => $record['channel'],
+            'columns' => $columns,
+            'points' => [ $points ]
         ]];
+
         if(!$this->async) {
             $response = $guzzle->post($this->url, [
                 'query' => [
