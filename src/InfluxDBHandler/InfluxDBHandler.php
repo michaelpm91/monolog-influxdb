@@ -14,7 +14,7 @@ class InfluxDBHandler extends AbstractProcessingHandler
     /**
      * @var
      */
-    private $intialised;
+    private $initialised;
 
     /**
      * @var int
