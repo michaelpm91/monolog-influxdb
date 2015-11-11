@@ -6,7 +6,7 @@ InfluxDB Handler for Monolog, which allows to store log messages in an InfluxDB 
 # Installation
 monolog-influxdb is available via composer
 ```
-"kidshenlong/monolog-mysql": "*"
+"kidshenlong/monolog-influxdb": "*"
 ```
 # Usage
 
